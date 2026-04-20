@@ -1,5 +1,5 @@
 # InkTime - SmartWatch Project
-InkTime este un concept de ceas inteligent axat pe eficiență energetica, utilizand un display e-Paper.
+InkTime este un concept de ceas inteligent axat pe eficienta energetica, utilizand un display e-Paper.
 
 ## Diagrama Bloc
 ```
@@ -90,3 +90,16 @@ InkTime este un concept de ceas inteligent axat pe eficiență energetica, utili
 | 1 | NRF52840_QF | NRF52840_QF | AQFN-74 | U1 | nRF52840 SoC |
 | 1 | RT6160AWSC | RT6160AWSC | BGA15 | IC9 | Buck-Boost Regulator |
 | 1 | SI1308EDL | SI1308EDL | SOT65P210
+
+## Functionalitati Hardware
+
+- Unitate Centrala: nRF52840 gestioneaza logica sistemului si conexiunea Bluetooth 5.4 prin arhitectura ARM Cortex-M4F.
+- Afisaj: Ecranul e-Paper de 1.54" utilizeaza interfata SPI pentru a mentine imaginea afisata cu consum zero de energie.
+- Senzori Miscare: Accelerometrul BMA423 comunica prin I2C pentru a detecta pasii si gesturile de activare a ecranului.
+- Feedback Haptic: Driverul DRV2605L utilizeaza magistrala I2C pentru a genera efecte de vibratie precise prin motorul intern.
+- Gestiune Energie: Integratul BQ25180 controleaza incarcarea bateriei prin USB-C, asigurand protectia si longevitatea celulei Li-Po.
+- Stabilizare Tensiune: Regulatorul Buck-Boost RT6160A mentine un prag constant de 3.3V necesar functionarii stabile a componentelor.
+- Monitorizare Baterie: Cipul MAX17048 raporteaza prin I2C nivelul de incarcare (SOC%) folosind algoritmi de masurare fara rezistor de sunt.
+- Eficienta: Combinatia dintre MCU-ul ultra-low-power si display-ul e-Paper permite o autonomie estimata de peste 60 de zile.
+
+  

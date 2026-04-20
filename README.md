@@ -102,4 +102,20 @@ InkTime este un concept de ceas inteligent axat pe eficienta energetica, utiliza
 - Monitorizare Baterie: Cipul MAX17048 raporteaza prin I2C nivelul de incarcare (SOC%) folosind algoritmi de masurare fara rezistor de sunt.
 - Eficienta: Combinatia dintre MCU-ul ultra-low-power si display-ul e-Paper permite o autonomie estimata de peste 60 de zile.
 
-  
+## Configuratia pinilor nRF52840
+
+- Bus SPI (P0.11-P0.15): Folosit pentru Display-ul e-Paper deoarece asigura latimea de banda mare necesara pentru transferul rapid al bufferului de imagine.
+- Bus I2C (P0.26, P0.27): Conecteaza senzorii (BMA423, MAX17048) si driverele (DRV2605, BQ25180) pe aceleasi doua fire pentru a minimiza numarul de trasee pe PCB.
+- Pini Butoane (P0.02, P0.03, P0.28): Alocati ca intrari digitale cu intreruperi (GPIOTE) pentru a permite trezirea instanta a ceasului din modul de consum redus (Deep Sleep).
+- Pin Busy Display (P0.16): Intrare digitala care permite MCU-ului sa astepte pana cand ecranul termina procesul fizic de refresh inainte de a trimite noi date.
+- Pin Interrupt BMA423 (P0.19): Conectat la MCU pentru a semnaliza detectia miscarii (wrist-tilt) fara ca procesorul sa interogheze constant senzorul, economisind energie.
+- Pin Enable Haptic (P0.20): Pin de control rapid pentru driverul DRV2605L, utilizat pentru a declansa secventele de vibratii sincronizate cu notificarile.
+- Pini Cristal 32MHz (XC1, XC2): Pini dedicati pentru oscilatorul extern de mare precizie, critic pentru functionarea corecta a radioului Bluetooth Low Energy.
+- Pini Cristal 32.768kHz (P0.00, P0.01): Folositi pentru ceasul de timp real (RTC) care asigura masurarea precisa a orei cu un consum de curent de ordinul microamperilor.
+- Pini SWD (SWDIO, SWDCLK): Interfata dedicata de programare si debug, absolut necesara pentru incarcarea firmware-ului si monitorizarea variabilelor in timp real.
+- Pin Reset (P0.18): Configurat ca intrare de reset hardware pentru a permite repornirea sigura a sistemului in cazul unui blocaj software (Watchdog/Manual).
+
+## Decizii luate
+- Am acceptat erorile de overlap pe pinii procesorului cauzate de via-uri deoarece nu am gasit o alta metoda de a trage cablu pana acolo.
+- Am acceptat erorile de copper clearence pentru ca orice alta solutie ar fi ingreunat si mai tare asezarea cablurilor.
+- Am acceptat erorile de airwire intrucat gasirea unui traseu intre 2 acei pini ar fi provocat mai multe erori de alte tipuri

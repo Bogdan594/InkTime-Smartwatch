@@ -2,6 +2,7 @@
 InkTime este un concept de ceas inteligent axat pe eficiență energetica, utilizand un display e-Paper.
 
 ## Diagrama Bloc
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                   SUBSISTEM ALIMENTARE                      │
 │                                                             │
